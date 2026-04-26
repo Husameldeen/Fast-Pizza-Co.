@@ -46,29 +46,7 @@ export const {
 export default cartSlice.reducer;
 */
 const initialState = {
-  cart: [
-    {
-      pizzaId: 12,
-      name: "pizza margiritta",
-      quantity: 2,
-      unitPrice: 12,
-      totalPrice: 24,
-    },
-    {
-      pizzaId: 11,
-      name: "pizza margiritta",
-      quantity: 2,
-      unitPrice: 12,
-      totalPrice: 24,
-    },
-    {
-      pizzaId: 13,
-      name: "pizza margiritta",
-      quantity: 2,
-      unitPrice: 12,
-      totalPrice: 24,
-    },
-  ],
+  cart: [],
 };
 
 export default function cartReducer(state = initialState, action) {
@@ -169,4 +147,19 @@ export function clearCart() {
   return {
     type: "cart/clearCart",
   };
+}
+
+export const getCart = (state) => state.cart.cart;
+
+export const getTotalCartQuantity = (state) =>
+  state.cart.cart.reduce(
+    (totalQuantity, item) => totalQuantity + item.quantity,
+    0,
+  );
+
+export function getTotalCartPrice(state) {
+  return state.cart.cart.reduce(
+    (totalPrice, item) => totalPrice + item.totalPrice,
+    0,
+  );
 }
