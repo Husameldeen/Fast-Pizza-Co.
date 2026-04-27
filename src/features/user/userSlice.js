@@ -70,7 +70,8 @@ export default function userReducer(state = initialState, action) {
       return {
         ...state,
         status: "error",
-        error: action.payload,
+        error:
+          "There was problem getting your address, make sure to fill this field",
       };
     default:
       return state;
