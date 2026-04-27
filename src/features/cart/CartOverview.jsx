@@ -6,7 +6,6 @@ import { formatCurrency } from "../../utils/helpers";
 function CartOverview() {
   const cartQuantity = useSelector(getTotalCartQuantity);
   const cartTotalPrice = useSelector(getTotalCartPrice);
-  console.log(cartTotalPrice);
 
   if (!cartQuantity) return null;
 

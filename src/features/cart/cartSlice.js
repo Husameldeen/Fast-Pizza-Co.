@@ -84,18 +84,20 @@ export default function cartReducer(state = initialState, action) {
       };
     }
     case "cart/decreaseItemQuantity": {
-      // payload = pizzaId
-      const decreasedCart = state.cart.map((item) => {
-        if (item.pizzaId === action.payload) {
-          const newQuantity = item.quantity - 1;
-          return {
-            ...item,
-            quantity: newQuantity,
-            totalPrice: newQuantity * item.unitPrice,
-          };
-        }
-        return item;
-      });
+      // payload = pizzaId;
+      const decreasedCart = state.cart
+        .map((item) => {
+          if (item.pizzaId === action.payload) {
+            const newQuantity = item.quantity - 1;
+            return {
+              ...item,
+              quantity: newQuantity,
+              totalPrice: newQuantity * item.unitPrice,
+            };
+          }
+          return item;
+        })
+        .filter((item) => item.quantity > 0);
       return {
         cart: decreasedCart,
       };
@@ -163,3 +165,13 @@ export function getTotalCartPrice(state) {
     0,
   );
 }
+
+export const getCartQuantity = (id) => (state) => {
+  const pizza = state.cart.cart.find((item) => item.pizzaId === id);
+  return pizza ? pizza.quantity : 0;
+};
+
+// export const getCartQuantity = (id) => (state) => {
+//   state.cart.cart.find((item) => item.pizzaId === id)?.quantity ?? 0;
+//   console.log(pizza);
+// };
